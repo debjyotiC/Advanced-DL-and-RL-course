@@ -29,11 +29,11 @@ b_hat = tf.reduce_mean(ytf)-w_hat*tf.reduce_mean(xtf)
 solve_w = model.w.assign(w_hat)
 solve_b = model.b.assign(tf.reduce_mean(ytf)-w_hat*tf.reduce_mean(xtf))
 
-with tf.Session() as sess:
+with tf.train.MonitoredSession() as sess:
     sess.run([solve_w, solve_b], feed_dict={xtf: xs, ytf: ys})
     preds = sess.run(model_output, feed_dict={xtf: xs, ytf: ys})
 
 
-plt.plot(xs, ys)
+plt.scatter(xs, ys)
 plt.plot(xs, preds)
 plt.show()
